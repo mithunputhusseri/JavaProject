@@ -1,0 +1,19 @@
+1.db.mongotest.find().pretty()
+
+2.db.mongotest.find({},{name: 1, _id: 0, id: 1})
+
+3.db.mongotest.find({},{id: 0}).pretty()
+
+4.db.mongotest.find().pretty().limit(5)
+
+5.db.mongotest.find().skip(5).limit(5).pretty()
+
+6.db.mongotest.find({city: "Gurgaon"})
+
+7.db.mongotest.find({"salary.jan":{$lt: 20000}})
+
+8.db.mongotest.find({$and: [{"salary.jan":{$lt: 20000}},{city: "Gurgaon"}]})
+
+9.db.mongotest.aggregate([{$group: {_id: null, "Total":{$sum: "$salary.jan"}}}])
+
+10.db.mongotest.find({city: "Gurgaon"}).count()
