@@ -1,0 +1,166 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Theme Company</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body onload="initialize()">
+<script>
+function add(){
+    var x = document.getElementById("frm2");
+    var num = "";
+    num = x.elements[0].value;
+    arr = num.split(" ");
+    var num1 = parseInt(arr[0]);
+    var num2 = parseInt(arr[1]);
+    var ans = num1 + num2;
+    document.getElementById("out").innerHTML = "result is: "+ ans;
+  
+}
+function sub(){
+    var x = document.getElementById("frm2");
+    var num = "";
+    num = x.elements[0].value;
+    arr = num.split(" ");
+    var num1 = parseInt(arr[0]);
+    var num2 = parseInt(arr[1]);
+    var ans = num1-num2
+    document.getElementById("out").innerHTML = "result is: "+ans;
+  
+}
+function mul(){
+    var x = document.getElementById("frm2");
+    var num = "";
+    num = x.elements[0].value;
+    arr = num.split(" ");
+    var num1 = parseInt(arr[0]);
+    var num2 = parseInt(arr[1]);
+    document.getElementById("out").innerHTML = "result is: "+num1*num2;
+  
+}
+function div(){
+    var x = document.getElementById("frm2");
+    var num = "";
+    num = x.elements[0].value;
+    arr = num.split(" ");
+    var num1 = parseInt(arr[0]);
+    var num2 = parseInt(arr[1]);
+    document.getElementById("out").innerHTML = "result is: " + num1/num2;
+}
+function initialize(){
+    var obj = {
+   name1: [],
+   place: []
+};
+obj.name1.push("john");
+obj.place.push("india")
+myJSON = JSON.stringify(obj);
+localStorage.setItem("testJSON", myJSON);
+}
+function nameplace(){
+   var x = document.getElementById("frm3");
+    var name = "";
+    var place = "";
+    name = x.elements[0].value; 
+    place = x.elements[1].value;
+    text = localStorage.getItem("testJSON");
+    var obj1 = JSON.parse(text);
+    //document.getElementById("out1").innerHTML = obj1.name1;
+    obj1.name1.push(name);
+    obj1.place.push(place); 
+    myJSON = JSON.stringify(obj1);
+    localStorage.setItem("testJSON", myJSON);
+    
+}
+function seetable(){
+    text = localStorage.getItem("testJSON");
+    var obj1 = JSON.parse(text);
+    var table = document.getElementById("table");
+    for(var i=0;i<obj1.name1.length;i++){
+          var row = table.insertRow(-1);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+            cell1.innerHTML = obj1.name1[i];
+            cell2.innerHTML =obj1.place[i];
+    }
+}
+function searchplace()
+{
+    var x = document.getElementById("frm4");
+    var name = x.elements[0].value; 
+   text = localStorage.getItem("testJSON");
+    var obj1 = JSON.parse(text);
+    var found = "-no data entered-";
+    for(var i=0;i<obj1.name1.length;i++)
+    {
+        if(name == obj1.name1[i])
+            found = obj1.place[i];
+    } 
+    document.getElementById("out2").innerHTML = 
+    "employee " + name+ " resides in "+found; 
+}
+</script>
+<div>
+<h2>Enter two numbers here</h2>
+   <form id="frm2">
+  <div class="form-group">
+    <label for="num">Eg: 1 2</label>
+    <input type="text" class="form-control" id="matA">
+  </div>
+    </form> 
+</div>
+<div>
+ <input type="radio" id="add" name="ari" onclick="add()">
+<label for="male">Add</label><br>
+<input type="radio" id="sub" name="ari" onclick="sub()">
+<label for="female">Substract</label><br>
+<input type="radio" id="mul" name="ari" onclick="mul()">
+<label for="other">Multiply</label><br>
+<input type="radio" id="div" name="ari" onclick="div()">
+<label for="other">Divide</label><br>
+</div>
+<div>
+<p id="out"></p>
+<p id ="out1"></p>
+</div>
+<div>
+<h2>Find place of an employee</h2>
+   <form id="frm4">
+  <div class="form-group">
+    <label for="name">Enter name:</label>
+    <input type="text" class="form-control" id="matA">
+  </div>
+   <input type="button" onclick="searchplace()" value="Submit" >
+    </form> 
+    <p id="out2"></p>
+</div>
+<div>
+<h2>Enter employee details</h2>
+   <form id="frm3">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="matA">
+  </div>
+  <div class="form-group">
+    <label for="place">Place:</label>
+    <input type="text" class="form-control" id="matB">
+  </div>
+   <input type="button" onclick="nameplace()" value="Submit" >
+    </form> 
+</div>
+ <div class="table-responsive">
+ <h2 id="reg">Employee Register</h2>
+ <input type="button" onclick="seetable()" value="See data" >
+  <table id="table" class="table">
+  <tr>
+    <th>Name</th>
+    <th>Place</th>
+  <tr>
+  </table>
+</div> 
+</body>
+</html> 
